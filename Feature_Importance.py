@@ -10,7 +10,6 @@ array = df.values
 cat_df_flights_onehot = df.copy()
 cat_df_flights_onehot = pandas.get_dummies(cat_df_flights_onehot, columns=['dur'], prefix = ['dur'])
 print(cat_df_flights_onehot.head())
-"""
 X = array[:,0:42]
 Y = array[:,42]
 print(df.head())
@@ -19,4 +18,3 @@ print(df.info())
 model = ExtraTreesClassifier()
 model.fit(X, Y)
 print(model.feature_importances_)
-"""
