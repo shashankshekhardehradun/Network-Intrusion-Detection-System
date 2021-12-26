@@ -1,0 +1,81 @@
+Layer (type)                 Output Shape              Param #
+=================================================================
+conv2d_1 (Conv2D)            (None, 14, 3, 32)         320
+_________________________________________________________________
+leaky_re_lu_1 (LeakyReLU)    (None, 14, 3, 32)         0
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 7, 2, 32)          0
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 7, 2, 32)          0
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 7, 2, 64)          18496
+_________________________________________________________________
+leaky_re_lu_2 (LeakyReLU)    (None, 7, 2, 64)          0
+_________________________________________________________________
+max_pooling2d_2 (MaxPooling2 (None, 4, 1, 64)          0
+_________________________________________________________________
+dropout_2 (Dropout)          (None, 4, 1, 64)          0
+_________________________________________________________________
+conv2d_3 (Conv2D)            (None, 4, 1, 64)          36928
+_________________________________________________________________
+leaky_re_lu_3 (LeakyReLU)    (None, 4, 1, 64)          0
+_________________________________________________________________
+max_pooling2d_3 (MaxPooling2 (None, 2, 1, 64)          0
+_________________________________________________________________
+dropout_3 (Dropout)          (None, 2, 1, 64)          0
+_________________________________________________________________
+conv2d_4 (Conv2D)            (None, 2, 1, 128)         73856
+_________________________________________________________________
+leaky_re_lu_4 (LeakyReLU)    (None, 2, 1, 128)         0
+_________________________________________________________________
+max_pooling2d_4 (MaxPooling2 (None, 1, 1, 128)         0
+_________________________________________________________________
+dropout_4 (Dropout)          (None, 1, 1, 128)         0
+_________________________________________________________________
+conv2d_5 (Conv2D)            (None, 1, 1, 128)         147584
+_________________________________________________________________
+leaky_re_lu_5 (LeakyReLU)    (None, 1, 1, 128)         0
+_________________________________________________________________
+max_pooling2d_5 (MaxPooling2 (None, 1, 1, 128)         0
+_________________________________________________________________
+dropout_5 (Dropout)          (None, 1, 1, 128)         0
+_________________________________________________________________
+conv2d_6 (Conv2D)            (None, 1, 1, 128)         147584
+_________________________________________________________________
+leaky_re_lu_6 (LeakyReLU)    (None, 1, 1, 128)         0
+_________________________________________________________________
+max_pooling2d_6 (MaxPooling2 (None, 1, 1, 128)         0
+_________________________________________________________________
+dropout_6 (Dropout)          (None, 1, 1, 128)         0
+_________________________________________________________________
+flatten_1 (Flatten)          (None, 128)               0
+_________________________________________________________________
+dense_1 (Dense)              (None, 128)               16512
+_________________________________________________________________
+leaky_re_lu_7 (LeakyReLU)    (None, 128)               0
+_________________________________________________________________
+dropout_7 (Dropout)          (None, 128)               0
+_________________________________________________________________
+dense_2 (Dense)              (None, 10)                1290
+=================================================================
+Total params: 442,570
+Trainable params: 442,570
+Non-trainable params: 0
+_________________________________________________________________
+
+Epochs 200
+
+
+1. The CNN consists of 6 hidden layers along with the input and output(softmax of 10 neurons) layers.
+2. After each convolutional block, leaky ReLu, max pooling and dropout of varying values has been applied.
+3. Leaky ReLu has been used since it prevents the neurons from "dying" which might happen with convemtional activations due to vanishing gradient problem.
+4. Max pooling reduces the computational cost since it just takes the maximum value from a prespecified kernel for low level feature abstraction.
+5. Dropout has been found out by various studies to be extremely effective in minimising overfitting. Various values for the dropout were experimented upon, starting from 0.5 and gradually tuning down till the optimum set of values was reached.
+6. Final softmax layer is used to assign the probabilities for prediction so it need to be the same size as the number of outputs( 10 in our case).
+7. All the convolutional blocks were of 3x3 dimension followed by a max pooling block of 2x2 dimension.
+8. Activation function for the convolutional layers was linear.
+9. The loss was categorical cross entropy since we were dealing with a multi class classification task and the optimizer used was Adam.
+10. The training weights were saved into an hdf5 file so that successive hyperparamter tuning cycles could be expedited.
+11. It was found that among various values, a satisfactory tradeoff between performance and computational time was achieved by setting the batch size as 256 and the number of epohs as 200.
+12. Finally, the evaluation on the testing set was done after completion of training and the accuracy and loss for each epoch was closely monitored.
+13. A confusion matrix was obtained after testing and various performance metrics such as recall, precision, F1 score, FAR, FNR etc were calculated and compared with the benchmark paper.

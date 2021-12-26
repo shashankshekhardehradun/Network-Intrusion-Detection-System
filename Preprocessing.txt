@@ -1,0 +1,9 @@
+
+
+                                                PREPROCESSING STEPS
+1. The testing and training data was entered into a pandas dataframe.
+2. The 4 columns containing categorical or object type data(proto, attack_cat, service, state) were converted to float 64 type using label encoder.
+3. The entire dataset was normalized using standard scaler and then stored in a csv file.
+4. The dataset was divided into 2 subclasses, the class labels and the target label( in this case, the attack label).
+5. Using the in-built splitting function, the dataset was split up into training and testing set( 80% training and 20% testing).
+6. The target class was encoded using one hot encoder and the class label data was reshaped so as to make it suitable for input into the CNN.
